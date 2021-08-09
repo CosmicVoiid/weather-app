@@ -1,0 +1,95 @@
+body {
+	background-image: url(./background.jpg);
+	background-repeat: no-repeat;
+	background-position: top;
+	color: #eee;
+	display: flex;
+	justify-content: center;
+}
+
+h1,
+h2,
+h3 {
+	margin: 0;
+}
+
+h1 {
+	font-size: 5rem;
+}
+
+.main-container {
+	margin-top: 2%;
+	margin-left: 10%;
+}
+
+.temp-container {
+	width: 0;
+}
+
+.info-container {
+	margin-top: 5%;
+	width: auto;
+	display: flex;
+}
+
+.primary {
+	margin-bottom: 5%;
+	width: 15vw;
+}
+
+.num-info {
+	display: flex;
+	align-items: flex-start;
+}
+
+.secondary {
+	margin-bottom: 10%;
+	width: 15vw;
+	font-size: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.form {
+	position: relative;
+	bottom: 5vw;
+}
+
+.city {
+	margin-top: 15%;
+	background: transparent;
+	border: none;
+	color: inherit;
+	border-bottom: 1px solid currentColor;
+	font-size: inherit;
+	outline: none;
+
+	transition: border-bottom 150ms ease-in;
+}
+
+.city::placeholder {
+	color: currentColor;
+}
+
+.city:focus {
+	border-bottom-width: 3px;
+}
+
+.city:focus::placeholder {
+	opacity: 0.2;
+}
+
+.btn {
+	color: inherit;
+	background-color: transparent;
+	border: none;
+}
+
+.btn:hover {
+	cursor: pointer;
+}
+
+.temp-container {
+	display: flex;
+}

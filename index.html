@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+		<div class="main-container">
+			<div class="info-container">
+				<div class="primary">
+					<h3 class="weather"></h3>
+					<h2 class="location primary"></h2>
+					<div class="temp-container">
+						<h1 class="temp primary"></h1>
+						<h3 class="unit"></h3>
+					</div>
+				</div>
+				<div class="secondary">
+					<div class="feels-like secondary"></div>
+					<div class="wind secondary"></div>
+					<div class="humidity secondary"></div>
+				</div>
+			</div>
+
+			<form class="form">
+				<input class="city" type="text" placeholder="Search city" required />
+				<button class="btn" type="submit">
+					<i class="fas fa-search enter"></i>
+				</button>
+			</form>
+		</div>
+
+		<script src="script.js"></script>
+		<script
+			src="https://kit.fontawesome.com/91ca498d3c.js"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>
