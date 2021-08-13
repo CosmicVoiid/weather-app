@@ -10,6 +10,9 @@ class Weather {
 	}
 }
 
+let unit = "imperial";
+let search = "Norfolk";
+
 function round(num) {
 	num = Math.round(num);
 	return num;
@@ -30,19 +33,27 @@ async function getData(location, unit) {
 }
 
 async function processData(search, unit) {
-	let data = await getData(search, unit);
-	console.log(data);
-	let obj = new Weather(
-		data.name,
-		data.sys.country,
-		data.weather[0].description,
-		round(data.main.temp),
-		round(data.main.feels_like),
-		round(data.wind.speed),
-		round(data.main.humidity)
-	);
-	console.log(obj);
-	display(obj, unit);
+	let data;
+	try {
+		data = await getData(search, unit);
+		console.log(data);
+		let obj = new Weather(
+			data.name,
+			data.sys.country,
+			data.weather[0].description,
+			round(data.main.temp),
+			round(data.main.feels_like),
+			round(data.wind.speed),
+			round(data.main.humidity)
+		);
+		console.log(obj);
+		display(obj, unit);
+	} catch (err) {
+		const errorDiv = document.querySelector(".error");
+		errorDiv.classList.remove("closed");
+		console.error(err);
+		return false;
+	}
 }
 
 function searchCity() {
@@ -52,32 +63,55 @@ function searchCity() {
 		e.preventDefault();
 
 		const city = document.querySelector(".city");
-		processData(city.value, "imperial");
+		search = city.value;
+		processData(city.value, unit);
 	});
 }
 
 function display(obj, unit) {
+	const errorDiv = document.querySelector(".error");
+	errorDiv.classList.add("closed");
 	const location = document.querySelector(".location");
 	const weather = document.querySelector(".weather");
 	const unitDOM = document.querySelector(".unit");
-	const unit2DOM = document.querySelector(".unit2");
 	const temp = document.querySelector(".temp");
 	const feels_like = document.querySelector(".feels-like");
 	const wind = document.querySelector(".wind");
 	const humidity = document.querySelector(".humidity");
-	let unitVal;
+	let unitVal, speed;
 
-	if (unit === "metric") unitVal = "\u2103";
-	else if (unit === "imperial") unitVal = "\u2109";
+	if (unit === "metric") {
+		unitVal = "\u2103";
+		speed = "KPH";
+	} else if (unit === "imperial") {
+		unitVal = "\u2109";
+		speed = "MPH";
+	}
 
 	location.textContent = `${obj.name}, ${obj.country}`;
 	weather.textContent = obj.weather;
 	temp.textContent = `${obj.temp}`;
 	unitDOM.textContent = `${unitVal}`;
 	feels_like.textContent = `FEELS LIKE: ${obj.feels_like} ${unitVal}`;
-	wind.textContent = `WIND: ${obj.wind} MPH`;
+	wind.textContent = `WIND: ${obj.wind} ${speed}`;
 	humidity.textContent = `HUMIDITY: ${obj.humidity}%`;
 }
+
+const changeUnit = document.querySelector(".change-unit");
+changeUnit.addEventListener("click", (e) => {
+	e.stopPropagation();
+	if (changeUnit.textContent === "\u2109") {
+		unit = "metric";
+		changeUnit.textContent = "\u2103";
+		console.log("1");
+	} else if (changeUnit.textContent === "\u2103") {
+		unit = "imperial";
+		changeUnit.textContent = "\u2109";
+		console.log("2");
+	}
+
+	processData(search, unit);
+});
 
 searchCity();
 processData("Norfolk", "imperial");

@@ -1,10 +1,22 @@
 body {
 	background-image: url(./background.jpg);
-	background-repeat: no-repeat;
+	background-repeat: repeat;
 	background-position: top;
 	color: #eee;
 	display: flex;
 	justify-content: center;
+}
+
+.change-unit {
+	background-color: transparent;
+	position: absolute;
+	left: 1%;
+	top: 1%;
+	border: none;
+}
+
+.change-unit:hover {
+	cursor: pointer;
 }
 
 h1,
@@ -92,4 +104,14 @@ h1 {
 
 .temp-container {
 	display: flex;
+}
+
+.error {
+	position: relative;
+	bottom: 15%;
+	color: rgb(87, 87, 87);
+}
+
+.closed {
+	display: none;
 }
